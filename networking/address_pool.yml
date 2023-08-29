@@ -1,0 +1,7 @@
+apiVersion: networking.k8s.io/v1alpha1
+kind: IPAddressPool
+metadata:
+  name: default-pool
+spec:
+  addresses:
+    - 192.168.1.1-192.168.1.255
