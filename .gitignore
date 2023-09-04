@@ -1,3 +1,5 @@
 #PyCharm Files
 .idea/
 venv/
+.terraform.lock.hcl
+.terraform/
