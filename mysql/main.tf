@@ -80,6 +80,8 @@ resource "kubernetes_service_v1" "mysql-cluster-access" {
       port = local.port
       target_port = local.port
     }
+    type = "ExternalName"
+    external_name = "mysql.kube.schooler.dev"
   }
 }
 

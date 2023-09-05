@@ -1,0 +1,17 @@
+identity:
+  schemas:
+    - id: default
+      url: file://./schemas/default.v1.traits.schema.json
+  default_schema_id: default
+selfservice:
+  flows:
+    registration:
+      enabled: false
+    recovery:
+      enabled: false
+    login:
+      lifespan: 12h
+session:
+  cookie:
+    domain: schooler.dev
+dsn: mysql://${MYSQL_USER}:${MYSQL_PASS}@${MYSQL_HOST}/${MYSQL_DB_NAME}
