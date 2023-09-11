@@ -14,4 +14,3 @@ selfservice:
 session:
   cookie:
     domain: schooler.dev
-dsn: mysql://${MYSQL_USER}:${MYSQL_PASS}@${MYSQL_HOST}/${MYSQL_DB_NAME}

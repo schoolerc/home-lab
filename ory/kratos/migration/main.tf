@@ -53,20 +53,8 @@ resource "kubernetes_job_v1" "kratos_migration" {
           image = "oryd/kratos:${local.version}"
           command = ["kratos", "migrate", "sql", "-e", "--config", "/home/ory/kratos.yml"]
           env {
-            name = "MYSQL_USER"
-            value = data.kubernetes_secret_v1.kratos_mysql_credentials.data.username
-          }
-          env {
-            name = "MYSQL_PASS"
-            value = data.kubernetes_secret_v1.kratos_mysql_credentials.data.password
-          }
-          env {
-            name = "MYSQL_HOST"
-            value = "mysql.kube.schooler.dev"
-          }
-          env {
-            name = "MYSQL_DB_NAME"
-            value = "kratos"
+            name = "DSN"
+            value = "mysql://${data.kubernetes_secret_v1.kratos_mysql_credentials.data.username}:${data.kubernetes_secret_v1.kratos_mysql_credentials.data.password}@tcp(mysql.kube.schooler.dev:3306)/kratos?parseTime=true"
           }
           volume_mount {
             mount_path = "/home/ory/"
