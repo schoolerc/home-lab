@@ -28,7 +28,7 @@ module "nfs_volume" {
   volume_name = local.name
   volume_claim_name = local.name
   capacity = local.storage
-  mount_path = "/mnt/external-storage/kubernetes/mysql"
+  mount_path = "/mnt/kubernetes/data/mysql"
 }
 
 resource "kubernetes_pod_v1" "mysql" {
@@ -80,6 +80,7 @@ resource "kubernetes_service_v1" "mysql-cluster-access" {
       port = local.port
       target_port = local.port
     }
+    type = "ClusterIP"
   }
 }
 

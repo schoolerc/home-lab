@@ -1,0 +1,33 @@
+global:
+  database:
+    roundcube:
+      database: roundcube
+      username: roundcube
+      existingSecret: mailu-secrets
+      existingSecretPasswordKey: roundcube_password
+existingSecret: mailu-secrets
+hostnames:
+  - mail.schooler.dev
+domain: schooler.dev
+persistence:
+  single_pvc: true
+  existingClaim: mailu
+  hostPath: /mnt/mailu
+externalDatabase:
+  enabled: true
+  type: mysql
+  host: mysql-cluster
+  username: mailu
+  existingSecret: mailu-secrets
+  existingSecretPasswordKey: mysql_password
+redis:
+  enabled: false
+externalRedis:
+  enabled: true
+  host: redis-cluster
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+clamav:
+  persistence:
+    enabled: false
