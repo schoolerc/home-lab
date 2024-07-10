@@ -11,9 +11,9 @@ provider "kubernetes" {
   config_path = "~/.kube/config"
 }
 
-resource "kubernetes_storage_class_v1" "local_path" {
+resource "kubernetes_storage_class_v1" "ext_ephemeral" {
   metadata {
-    name = "ext-storage"
+    name = "ext-ephemeral-storage"
   }
   storage_provisioner = "rancher.io/local-path"
   parameters = {
@@ -24,3 +24,15 @@ resource "kubernetes_storage_class_v1" "local_path" {
   reclaim_policy      = "Delete"
 }
 
+resource "kubernetes_storage_class_v1" "ext_persistent" {
+  metadata {
+    name = "ext-persistent-storage"
+  }
+  storage_provisioner = "rancher.io/local-path"
+  parameters = {
+    nodePath    = "/mnt/storage"
+    pathPattern = "{{ .PVC.Namespace }}/{{ .PVC.Name }}"
+  }
+  volume_binding_mode = "WaitForFirstConsumer"
+  reclaim_policy      = "Retain"
+}
