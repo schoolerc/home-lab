@@ -1,0 +1,16 @@
+---
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: lets-encrypt
+  enabled: true
+  className: traefik
+  hosts:
+    - npm.schooler.dev
+  tls:
+    - hosts:
+        - npm.schooler.dev
+      secretName: npm-cert
+
+persistence:
+  enabled: true
+  size: 16Gi
